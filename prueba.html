@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<link rel="stylesheet" href="jquery-ui.css">
+<script src="jquery-1.12.4.js"></script>
+<script src="jquery-ui.js"></script>
+<body>
+<!-- desplegable de horarios de boletines -->
+ Seleccionar hora
+   <select class="form-select" aria-label="hora Boletines" id="selectorHora">
+      <!-- <option selected>"Seleccionar hora de primer Boletín"</option> -->
+     
+      <option selected value="07:00hs">07hs</option>
+      <option value="08:00hs">08hs</option>
+      <option value="09:00hs">09hs</option>
+      <option value="10:00hs">10hs</option>
+      <option value="11:00hs">11hs</option>
+      <option value="12:00hs">12hs</option>
+      <option value="13:00hs">13hs</option>
+      <option value="14:00hs">14hs</option>
+      <option value="15:00hs">15hs</option>
+      <option value="16:00hs">16hs</option>
+      <option value="17:00hs">17hs</option>
+      <option value="18:00hs">18hs</option>
+      <option value="19:00hs">19hs</option>
+      <option value="20:00hs">20hs</option>
+      <option value="21:00hs">21hs</option>
+      <option value="22:00hs">22hs</option>
+    </select>
+
+
+
+   <!-- Checkbox de Locutorxs-->
+   <p>Locución</p>
+
+   <form id="locus">
+         <input type="checkbox" name="siglaLocutorxs" value="RB">Randolfo Barrionuevo<br>
+         <input type="checkbox" name="siglaLocutorxs" value="EJK">Esteban Jacyna Kurmin<br>
+         <input type="checkbox" name="siglaLocutorxs" value="JF">Joaquín Ferrari<br>
+         <input type="checkbox" name="siglaLocutorxs" value="MC">Mariana Cotto<br>
+         <input type="checkbox" name="siglaLocutorxs" value="FG">Fabiana García<br>
+         <input type="checkbox" name="siglaLocutorxs" value="AAB">Alelí Alegría Cuba<br>
+         <input type="checkbox" name="siglaLocutorxs" value="LT">Lucía Tenuta<br>
+         <input type="checkbox" name="siglaLocutorxs" value="PD">Pablo Domian<br>
+         <input type="checkbox" name="siglaLocutorxs" value="SF">Soledad Fernández<br>
+         </form>
+   
+         <br>
+   <!-- Radio de Operadorxs-->
+   <!--
+         <label for="opers">Operación: </label>
+         <input type="radio" name="opers" value="AM">Ayelén Machado
+         <input type="radio" name="opers" value="SZ">Soledad Zunino
+         <input type="radio" name="opers" value="JC">Juan Coria
+         <input type="radio" name="opers" value="GM">
+         <input type="radio" name="opers" value="LB">Lucila Bidondo
+         <input type="radio" name="opers" value="ET">
+         <input type="radio" name="opers" value="AS">Alejandro Sanz
+         <input type="radio" name="opers" value="SS">Sebastián Siddi
+         
+        -->
+        <select class="form-select" aria-label="operadorxs" id="opers">
+          <!-- <option selected>"Seleccionar hora de primer Boletín"</option> -->
+         
+          <option selected value="AM">Ayelén Machado</option>
+          <option value="SZ">Soledad Zunino</option>
+          <option value="JC">Juan Coria</option>
+          <option value="GM">Gonzalo Maria</option>
+          <option value="LB">Lucila Bidondo</option>
+          <option value="ET">Emilio Trotta</option>
+          <option value="AS">Alejandro Sanz</option>
+          <option value="SS">Sebastián Siddi</option>
+        </select>
+
+
+
+
+    <!-- Botones -->
+    <br>
+    <br>
+    <br>
+    <button onclick="displayBoletin()">Generar Boletines</button>
+    <button onclick="displayTitulos1000()">Títulos Mañana</button>
+    <button onclick="displayTitulos1430()">Títulos Tarde</button>
+    <button onclick="displayTitulos1930()">Títulos Noche</button>
+    <button onclick="displayTitulosFinde()">Títulos Fin de Semana</button>
+    <button onclick="displayBoletinDT()">Deportivo Télam</button>
+    <p id="show_name">
+    </p>
+
+</body>
+
+
+<script>
+function diaSemana(){
+   var dias=["Domingo", "lun", "mar", "mie", "jue", "vie", "sab"];
+   const fecha = new Date();
+   const hoy = fecha.getDate();
+   var mes = meses[fecha.getMonth()];
+      const anioActual = fecha.getFullYear();
+
+var dia="16";
+var mes="November";
+var anio="2016";
+
+    var dt = new Date(mes+' '+dia+', '+anio+' 12:00:00');
+
+
+    document.getElementById('div1').innerHTML = "Dia de la semana : " + dias[dt.getUTCDay()];    
+};
+
+
+
+function displayBoletin() {
+      var siglaLocutorxs = document.forms[0];
+      var locucion ="";
+      var txt = "";
+      var i;
+      for (i = 0; i < siglaLocutorxs.length; i++) {
+        if (siglaLocutorxs[i].checked) {
+          txt = txt + siglaLocutorxs[i].value + " ";
+        }
+      }
+      document.getElementById("locus").value = txt;
+      
+      locucion = txt
+
+      let meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+      var horaBoletin = document.getElementById("selectorHora").value;
+      var operadorxs = document.getElementById('opers').value;
+
+      const fecha = new Date();
+      const hoy = fecha.getDate();
+      var mes = meses[fecha.getMonth()];
+      const anioActual = fecha.getFullYear();
+      document.getElementById("show_name").innerHTML = "Boletín de las " + horaBoletin + " del " + hoy + " de " + mes + " de " +anioActual 
+      + "<br>" 
+      + "<br> Boletín federal de noticias. Informativo radial con las últimas novedades nacionales, regionales e internacionales."
+      + "<br>" 
+      + "<br>Informativo enlatado con actualización cada hora de Lunes a viernes de 7 a 19. Sábados de 8 a 13, cada hora."
+      + "<br>" 
+      + "<br>Locución: " + locucion
+      + "<br>Compaginación: " + operadorxs
+      + "<br>Carga: "+ operadorxs;
+   }
+   
+
+   
+function displayTitulos1000() {
+      var siglaLocutorxs = document.forms[0];
+      var locucion ="";
+      var txt = "";
+      var i;
+      for (i = 0; i < siglaLocutorxs.length; i++) {
+        if (siglaLocutorxs[i].checked) {
+          txt = txt + siglaLocutorxs[i].value + " ";
+        }
+      }
+      document.getElementById("locus").value = txt;
+      
+      locucion = txt
+
+      let meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+      var horaBoletin = document.getElementById("selectorHora").value;
+      var operadorxs = document.getElementById('opers').value;
+      
+      const fecha = new Date();
+      const hoy = fecha.getDate();
+      var mes = meses[fecha.getMonth()];
+      const anioActual = fecha.getFullYear();
+      document.getElementById("show_name").innerHTML = "TÉLAM RADIO, en un minuto - Mañana - " + hoy + " de " + mes + " de " +anioActual 
+      + "<br>" 
+      + "<br> Télam Radio te cuenta en sesenta segundos las noticias nacionales e internacionales más importantes."
+      + "<br> Todas las semanas de lunes a viernes a las 10:00, 14.30 y 19:30 horas y los sábados a las 13 tenés a tu alcance un minuto de noticias."
+      + "<br> Más información en www.cablera.telam.com.ar/audios."
+      + "<br>"
+      + "<br>Principales títulos informativos al promediar la mañana."
+      + "<br>" 
+      + "<br>Locución: " + locucion
+      + "<br>Compaginación: " + operadorxs
+      + "<br>Carga: "+ operadorxs;
+   }
+   
+   function displayTitulos1430() {
+      var siglaLocutorxs = document.forms[0];
+      var locucion ="";
+      var txt = "";
+      var i;
+      for (i = 0; i < siglaLocutorxs.length; i++) {
+        if (siglaLocutorxs[i].checked) {
+          txt = txt + siglaLocutorxs[i].value + " ";
+        }
+      }
+      document.getElementById("locus").value = txt;
+      
+      locucion = txt
+
+      let meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+      var horaBoletin = document.getElementById("selectorHora").value;
+      var operadorxs = document.getElementById('opers').value;
+      
+      const fecha = new Date();
+      const hoy = fecha.getDate();
+      var mes = meses[fecha.getMonth()];
+      const anioActual = fecha.getFullYear();
+      document.getElementById("show_name").innerHTML = "TÉLAM RADIO, en un minuto - Tarde - " + hoy + " de " + mes + " de " +anioActual 
+      + "<br>" 
+      + "<br> Télam Radio te cuenta en sesenta segundos las noticias nacionales e internacionales más importantes."
+      + "<br> Todas las semanas de lunes a viernes a las 10:00, 14.30 y 19:30 horas y los sábados a las 13 tenés a tu alcance un minuto de noticias."
+      + "<br> Más información en www.cablera.telam.com.ar/audios."
+      + "<br>"
+      + "<br>Principales títulos informativos al promediar el día."
+      + "<br>" 
+      + "<br>Locución: " + locucion
+      + "<br>Compaginación: " + operadorxs
+      + "<br>Carga: "+ operadorxs;
+   }
+
+   function displayTitulos1930() {
+      var siglaLocutorxs = document.forms[0];
+      var locucion ="";
+      var txt = "";
+      var i;
+      for (i = 0; i < siglaLocutorxs.length; i++) {
+        if (siglaLocutorxs[i].checked) {
+          txt = txt + siglaLocutorxs[i].value + " ";
+        }
+      }
+      document.getElementById("locus").value = txt;
+      
+      locucion = txt
+
+      let meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+      var horaBoletin = document.getElementById("selectorHora").value;
+      var operadorxs = document.getElementById('opers').value;
+      
+      const fecha = new Date();
+      const hoy = fecha.getDate();
+      var mes = meses[fecha.getMonth()];
+      const anioActual = fecha.getFullYear();
+      document.getElementById("show_name").innerHTML = "TÉLAM RADIO, en un minuto - Noche - " + hoy + " de " + mes + " de " +anioActual 
+      + "<br>" 
+      + "<br> Télam Radio te cuenta en sesenta segundos las noticias nacionales e internacionales más importantes."
+      + "<br> Todas las semanas de lunes a viernes a las 10:00, 14.30 y 19:30 horas y los sábados a las 13 tenés a tu alcance un minuto de noticias."
+      + "<br> Más información en www.cablera.telam.com.ar/audios."
+      + "<br>"
+      + "<br>Principales títulos informativos al finalizar la tarde."
+      + "<br>" 
+      + "<br>Locución: " + locucion
+      + "<br>Compaginación: " + operadorxs
+      + "<br>Carga: "+ operadorxs;
+   }
+
+   function displayTitulosFinde() {
+      var siglaLocutorxs = document.forms[0];
+      var locucion ="";
+      var txt = "";
+      var i;
+      for (i = 0; i < siglaLocutorxs.length; i++) {
+        if (siglaLocutorxs[i].checked) {
+          txt = txt + siglaLocutorxs[i].value + " ";
+        }
+      }
+      document.getElementById("locus").value = txt;
+      
+      locucion = txt
+
+      let meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+      var horaBoletin = document.getElementById("selectorHora").value;
+      var operadorxs = document.getElementById('opers').value;
+      
+      const fecha = new Date();
+      const hoy = fecha.getDate();
+      var mes = meses[fecha.getMonth()];
+      const anioActual = fecha.getFullYear();
+      document.getElementById("show_name").innerHTML = "TÉLAM RADIO, en un minuto - 13:00hs - " + hoy + " de " + mes + " de " +anioActual 
+      + "<br>" 
+      + "<br> Télam Radio te cuenta en sesenta segundos las noticias nacionales e internacionales más importantes."
+      + "<br> Todas las semanas de lunes a viernes a las 10:00, 14.30 y 19:30 horas y los sábados a las 13 tenés a tu alcance un minuto de noticias."
+      + "<br> Más información en www.cablera.telam.com.ar/audios."
+      + "<br>"
+      + "<br>Principales títulos informativos al promediar el día."
+      + "<br>" 
+      + "<br>Locución: " + locucion
+      + "<br>Compaginación: " + operadorxs
+      + "<br>Carga: "+ operadorxs;
+   }
+   function displayBoletinDT() {
+      var siglaLocutorxs = document.forms[0];
+      var locucion ="";
+      var txt = "";
+      var i;
+      for (i = 0; i < siglaLocutorxs.length; i++) {
+        if (siglaLocutorxs[i].checked) {
+          txt = txt + siglaLocutorxs[i].value + " ";
+        }
+      }
+      document.getElementById("locus").value = txt;
+      
+      locucion = txt
+
+      let meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+      var horaBoletin = document.getElementById("selectorHora").value;
+      var operadorxs = document.getElementById('opers').value;
+      
+      const fecha = new Date();
+      const hoy = fecha.getDate();
+      var mes = meses[fecha.getMonth()];
+      const anioActual = fecha.getFullYear();
+      document.getElementById("show_name").innerHTML = "Deportivo Télam 11:00hs - " + hoy + " de " + mes + " de " +anioActual 
+      + "<br>" 
+      + "<br> Boletín de cuatro minutos con lo más saliente del deporte nacional e internacional. Información, testimonios y corte de entrevistas exclusivas."
+      + "<br>" 
+      + "<br>Carga: "+ operadorxs;
+   }
+</script>
+</html>
